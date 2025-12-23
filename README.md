@@ -1,9 +1,7 @@
-# 📦 Streamlit App Starter Kit 
-```
-⬆️ (Replace above with your app's name)
-```
+# 📦 Streamlit ClinIA Notetaker 
 
-Description of the app ...
+
+Record Audio
 
 ## Demo App
 
