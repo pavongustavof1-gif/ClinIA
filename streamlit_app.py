@@ -1,4 +1,4 @@
-st.set_page_config(page_title="Note Taker Alpha", page_icon="📝")
+st.set_page_config(page_title="Note Taker Alpha")
  
 st.title("ClinIA Asistente de Notas en Español 🇲🇽")
 st.info("Alpha v0.1 - Grabación Directa")
