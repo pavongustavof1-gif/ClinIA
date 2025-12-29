@@ -2,7 +2,7 @@ import streamlit as st
 
 st.set_page_config(page_title="Note Taker Alpha")
 
-st.title("Asistente de Notas en Español 🇪🇸")
+st.title("Asistente de Notas en Español 🇲🇽")
 st.info("Alpha v0.1 - Grabación Directa")
 
 # The NEW native Streamlit component (Available in Streamlit 1.40+)
