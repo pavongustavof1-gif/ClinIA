@@ -26,7 +26,7 @@ if audio_data:
 # 1. Setup your API Key
 aai.settings.api_key = "077c7fb352f4406b8d99cc78f999cb3a"
 def transcription_phase(audio_source):
-    st.write ("transcription_phase llamado")
+    st.write ("transcription_phase llamado") # <-- 
     """
     Phase A: Converts audio (local file or URL) into a Transcript object.
     """
@@ -47,7 +47,7 @@ def transcription_phase(audio_source):
     return transcript
 
 # Example Usage:
-st.write ("listo para enviar a transcription phase")
+st.write ("listo para enviar a transcription phase")  <--
 result = transcription_phase(raw_audio_bytes)
 if result:
     print(result.text)
