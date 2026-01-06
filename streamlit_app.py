@@ -17,7 +17,7 @@ if audio_data:
     
     # 2. Convert to bytes for our AI services
     raw_audio_bytes = audio_data.read()
-    st.write (raw_audio_bytes)
+    st.write (raw_audio_bytes) # <--
     
     if st.button("Generar Resumen y Google Doc"):
         with st.spinner("Transcribiendo y analizando..."):
