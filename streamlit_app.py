@@ -45,7 +45,7 @@ def transcription_phase(audio_source):
     return transcript
 
 # Example Usage:
-result = transcription_phase(raw_audio_source)
+result = transcription_phase(raw_audio_bytes)
 if result:
     print(result.text)
 
