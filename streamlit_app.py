@@ -11,6 +11,7 @@ audio_data = st.audio_input("Haz clic en el micrófono para grabar la conversaci
 
 if audio_data:
     # 1. Show the player so the user can verify the audio
+    st.write ("recibido en if audio_data")
     st.audio(audio_data)
     st.success("Audio capturado. Listo para procesar.")
     
