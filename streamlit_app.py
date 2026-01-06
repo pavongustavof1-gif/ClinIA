@@ -15,7 +15,7 @@ if audio_data:
     st.success("Audio capturado. Listo para procesar.")
     
     # 2. Convert to bytes for our AI services
-    # raw_audio_bytes = audio_data.read()
+    raw_audio_bytes = audio_data.read()
     
     if st.button("Generar Resumen y Google Doc"):
         with st.spinner("Transcribiendo y analizando..."):
@@ -31,10 +31,10 @@ def transcription_phase(audio_source):
     # Initialize the Transcriber
     transcriber = aai.Transcriber()
 
-    print(f"Starting transcription for: {audio_source}") # audio_data??
+    print(f"Starting transcription for: {raw_audio_bytes}") # audio_data??
     
     # This call is synchronous and will block until the transcript is ready
-    transcript = transcriber.transcribe(audio_source)  # audio_data??
+    transcript = transcriber.transcribe(raw_audio_bytes)  # audio_data??
 
     # Error handling
     if transcript.status == aai.TranscriptStatus.error:
