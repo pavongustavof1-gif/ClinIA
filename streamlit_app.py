@@ -25,9 +25,9 @@ if audio_data:
 # 1. Setup your API Key
 aai.settings.api_key = "077c7fb352f4406b8d99cc78f999cb3a"
 def transcription_phase(audio_source):
-    """
+    """
     Phase A: Converts audio (local file or URL) into a Transcript object.
-    """
+    """
     # Initialize the Transcriber
     transcriber = aai.Transcriber()
  
