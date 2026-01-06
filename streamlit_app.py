@@ -31,10 +31,10 @@ def transcription_phase(audio_source):
     # Initialize the Transcriber
     transcriber = aai.Transcriber()
 
-    print(f"Starting transcription for: {raw_audio_bytes}") # audio_data??
+    print(f"Starting transcription for: {audio_source}") # audio_data??
     
     # This call is synchronous and will block until the transcript is ready
-    transcript = transcriber.transcribe(raw_audio_bytes)  # audio_data??
+    transcript = transcriber.transcribe(audio_source)  # audio_data??
 
     # Error handling
     if transcript.status == aai.TranscriptStatus.error:
@@ -45,9 +45,9 @@ def transcription_phase(audio_source):
     return transcript
 
 # Example Usage:
-# result = transcription_phase("https://example.com/audio.mp3")
-# if result:
-#     print(result.text)
+result = transcription_phase(raw_audio_source)
+if result:
+    print(result.text)
 
 # config = aai.TranscriptionConfig(speaker_labels=True, auto_chapters=True)
 # transcript = transcriber.transcribe(audio_source, config=config)
