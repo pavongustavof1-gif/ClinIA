@@ -29,20 +29,20 @@ def transcription_phase(audio_source):
     Phase A: Converts audio (local file or URL) into a Transcript object.
     """
     # Initialize the Transcriber
-    transcriber = aai.Transcriber()
+    transcriber = aai.Transcriber()
  
-    print(f"Starting transcription for: {audio_source}") # audio_data??
+    print(f"Starting transcription for: {audio_source}") # audio_data??
     
     # This call is synchronous and will block until the transcript is ready
-    transcript = transcriber.transcribe(audio_source)  # audio_data??
+    transcript = transcriber.transcribe(audio_source)  # audio_data??
  
     # Error handling
-    if transcript.status == aai.TranscriptStatus.error:
-        print(f"Transcription failed: {transcript.error}")
-        return None
+    if transcript.status == aai.TranscriptStatus.error:
+        print(f"Transcription failed: {transcript.error}")
+        return None
  
-    print("Transcription successful!")
-    return transcript
+    print("Transcription successful!")
+    return transcript
  
 # Example Usage:
 # result = transcription_phase("https://example.com/audio.mp3")
