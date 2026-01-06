@@ -47,7 +47,7 @@ def transcription_phase(audio_source):
 # Example Usage:
 result = transcription_phase(raw_audio_source)
 if result:
-    print(result.text)
+    print(result.text)
 
 # config = aai.TranscriptionConfig(speaker_labels=True, auto_chapters=True)
 # transcript = transcriber.transcribe(audio_source, config=config)
