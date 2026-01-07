@@ -37,7 +37,7 @@ def transcription_phase(audio_source):
     print(f"Starting transcription for: {audio_source}") 
     
     # This call is synchronous and will block until the transcript is ready
-    transcript = transcriber(config = config).transcribe(audio_source) 
+    transcript = aai.transcriber(config = config).transcribe(audio_source) 
 
     # Error handling
     if transcript.status == aai.TranscriptStatus.error:
