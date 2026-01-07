@@ -23,7 +23,7 @@ if audio_data:
         f.write(audio_data.getvalue())
 
     st.write(f"Saved to {filename}")
-    # Now you can use `filename` or `audio_value.getvalue()` in your API call
+    # Now you can use `filename` or `audio_data.getvalue()` in your API call
 
     
     if st.button("Generar Resumen y Google Doc"):
@@ -56,7 +56,7 @@ def transcription_phase(audio_source):
 
 # Example Usage:
 st.write ("listo para enviar a transcription phase")  # <--
-result = transcription_phase(audio_value.getvalue())
+result = transcription_phase(audio_data.getvalue())
 if result:
     print(result.text)
 
