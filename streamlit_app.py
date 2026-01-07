@@ -5,6 +5,16 @@ import assemblyai as aai
 
 aai.settings.api_key = "077c7fb352f4406b8d99cc78f999cb3a"    # <— move to secrets
 
+config = aai.TranscriptionConfig(
+    format_text=True,
+    punctuate=True,
+    language_code="es"    
+)
+config.speech_models = [
+    "universal"
+]
+
+
 # —————————- Page Headers ————————
 
 st.set_page_config(page_title="Note Taker Alpha")
