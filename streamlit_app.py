@@ -39,14 +39,14 @@ def transcription_phase(audio_source):
     # This call is synchronous and will block until the transcript is ready
     transcript = transcriber.transcribe(audio_source) 
 
-    st.write(transcript.text)  # <-- debug
+    # st.write("Tu dijiste: ", transcript.text)   <-- debug
     
     # Error handling
     if transcript.status == aai.TranscriptStatus.error:
         print(f"Transcription failed: {transcript.error}")
         return None
 
-    print("Transcription successful!")
+    st.write("Transcription successful!")
     return transcript
 
 
@@ -76,7 +76,7 @@ if audio_data:
     st.write ("listo para enviar a transcription phase")  # <--
     result = transcription_phase(filename)
     if result:
-        print(result.text)
+        st.write ("Tu dijiste:  ",result.text)
     
     #    if st.button("Generar Resumen y Google Doc"):
     #        with st.spinner("Transcribiendo y analizando..."):
