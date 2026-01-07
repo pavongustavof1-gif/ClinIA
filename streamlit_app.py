@@ -56,7 +56,7 @@ def transcription_phase(audio_source):
 
 # Example Usage:
 st.write ("listo para enviar a transcription phase")  # <--
-result = transcription_phase(audio_data.getvalue())
+result = transcription_phase(recorded_audio.wav)
 if result:
     print(result.text)
 
