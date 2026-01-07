@@ -5,14 +5,6 @@ import assemblyai as aai
 
 aai.settings.api_key = "077c7fb352f4406b8d99cc78f999cb3a"    # <— move to secrets
 
-config = aai.TranscriptionConfig(
-    format_text=True,
-    punctuate=True,
-    language_code="es"    
-)
-config.speech_models = [
-    "universal"
-]
 
 
 # —————————- Page Headers ————————
@@ -35,6 +27,16 @@ def transcription_phase(audio_source):
     # transcriber = aai.Transcriber()
 
     print(f"Starting transcription for: {audio_source}") 
+
+    config = aai.TranscriptionConfig(
+        format_text=True,
+        punctuate=True,
+        language_code="es"    
+    )
+    config.speech_models = [
+        "universal"
+    ]
+
     
     # This call is synchronous and will block until the transcript is ready
     transcript = aai.transcriber(config = config).transcribe(audio_source) 
