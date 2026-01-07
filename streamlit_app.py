@@ -17,7 +17,7 @@ if audio_data:
     
     # 2. Convert to bytes for our AI services
     raw_audio_bytes = audio_data.read()
-    st.write (raw_audio_bytes) # <--
+
     
     if st.button("Generar Resumen y Google Doc"):
         with st.spinner("Transcribiendo y analizando..."):
@@ -28,9 +28,9 @@ if audio_data:
 aai.settings.api_key = "077c7fb352f4406b8d99cc78f999cb3a"
 def transcription_phase(audio_source):
     st.write ("transcription_phase llamado") # <-- 
-    """
-    Phase A: Converts audio (local file or URL) into a Transcript object.
-    """
+  
+    # Phase A: Converts audio (local file or URL) into a Transcript object.
+
     # Initialize the Transcriber
     transcriber = aai.Transcriber()
 
