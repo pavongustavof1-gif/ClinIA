@@ -3,7 +3,7 @@
 import streamlit as st
 import assemblyai as aai
 
-aai.settings.api_key = "077c7fb352f4406b8d99cc78f999cb3a”    # <— move to secrets
+aai.settings.api_key = "077c7fb352f4406b8d99cc78f999cb3a"    # <— move to secrets
 
 # —————————- Page Headers ————————
 
