@@ -10,8 +10,8 @@ config = aai.TranscriptionConfig(
     punctuate=True,
     language_code="es"    
 )
-config.speech_models = [
-    "universal"
+# config.speech_models = [
+#     "universal"
 ]
 
 
