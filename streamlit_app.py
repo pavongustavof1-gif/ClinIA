@@ -37,7 +37,7 @@ def transcription_phase(audio_source):
     print(f"Starting transcription for: {audio_source}") 
     
     # This call is synchronous and will block until the transcript is ready
-    transcript = transcriber.transcribe(audio_source) 
+    transcript = transcriber(config = config).transcribe(audio_source) 
 
     # Error handling
     if transcript.status == aai.TranscriptStatus.error:
@@ -76,10 +76,11 @@ if audio_data:
     if result:
         print(result.text)
     
-        if st.button("Generar Resumen y Google Doc"):
-            with st.spinner("Transcribiendo y analizando..."):
+    #    if st.button("Generar Resumen y Google Doc"):
+    #        with st.spinner("Transcribiendo y analizando..."):
                 # This is where we will plug in the Transcription + LLM logic
-                st.write("Siguiente paso: Enviando a la IA...")
+    #            st.write("Siguiente paso: Enviando a la IA...")
+st.write("Ya fin...")
 
 # config = aai.TranscriptionConfig(speaker_labels=True, auto_chapters=True)
 # transcript = transcriber.transcribe(audio_source, config=config)
