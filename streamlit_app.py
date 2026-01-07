@@ -16,7 +16,14 @@ if audio_data:
     st.success("Audio capturado. Listo para procesar.")
     
     # 2. Convert to bytes for our AI services
-    raw_audio_bytes = audio_data.read()
+    raw_audio_bytes = audio_data.read()  # <--- se va?
+    # Save to a file
+    filename = "recorded_audio.wav"
+    with open(filename, "wb") as f:
+        f.write(audio_data.getvalue())
+
+    st.write(f"Saved to {filename}")
+    # Now you can use `filename` or `audio_value.getvalue()` in your API call
 
     
     if st.button("Generar Resumen y Google Doc"):
@@ -49,7 +56,7 @@ def transcription_phase(audio_source):
 
 # Example Usage:
 st.write ("listo para enviar a transcription phase")  # <--
-result = transcription_phase(raw_audio_bytes)
+result = transcription_phase(filename)
 if result:
     print(result.text)
 
