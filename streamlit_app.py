@@ -29,7 +29,7 @@ aai.settings.api_key = "077c7fb352f4406b8d99cc78f999cb3a"
 def transcription_phase(audio_source):
     st.write ("transcription_phase llamado") # <-- 
   
-    # Phase A: Converts audio (local file or URL) into a Transcript object.
+    # Phase A: Converts audio (local file or URL) into a Transcript object.
 
     # Initialize the Transcriber
     transcriber = aai.Transcriber()
