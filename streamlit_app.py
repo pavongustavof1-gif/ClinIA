@@ -25,6 +25,12 @@ if audio_data:
     st.write(f"Saved to {filename}")
     # Now you can use `filename` or `audio_data.getvalue()` in your API call
 
+    # Example Usage:
+    st.write ("listo para enviar a transcription phase")  # <--
+    result = transcription_phase(filename)
+    if result:
+        print(result.text)
+
     
     if st.button("Generar Resumen y Google Doc"):
         with st.spinner("Transcribiendo y analizando..."):
@@ -54,11 +60,6 @@ def transcription_phase(audio_source):
     print("Transcription successful!")
     return transcript
 
-# Example Usage:
-st.write ("listo para enviar a transcription phase")  # <--
-result = transcription_phase(filename)
-if result:
-    print(result.text)
 
 # config = aai.TranscriptionConfig(speaker_labels=True, auto_chapters=True)
 # transcript = transcriber.transcribe(audio_source, config=config)
