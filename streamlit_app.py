@@ -10,9 +10,9 @@ config = aai.TranscriptionConfig(
     punctuate=True,
     language_code="es"    
 )
-# config.speech_models = [
-#     "universal"
-# ]
+config.speech_models = [
+    "universal"
+]
 
 
 # —————————- Page Headers ————————
@@ -32,7 +32,7 @@ def transcription_phase(audio_source):
     # Phase A: Converts audio (local file or URL) into a Transcript object.
 
     # Initialize the Transcriber
-    transcriber = aai.Transcriber()
+    # transcriber = aai.Transcriber()
 
     print(f"Starting transcription for: {audio_source}") 
     
