@@ -12,7 +12,7 @@ config = aai.TranscriptionConfig(
 )
 # config.speech_models = [
 #     "universal"
-]
+# ]
 
 
 # —————————- Page Headers ————————
