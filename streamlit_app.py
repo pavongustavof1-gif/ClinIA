@@ -25,7 +25,8 @@ def transcription_phase(audio_source):
     config = aai.TranscriptionConfig(
         format_text=True,
         punctuate=True,
-        language_code="es"    
+        language_code="es",
+        speaker_labels=True
     )
     config.speech_models = [
         "universal"
