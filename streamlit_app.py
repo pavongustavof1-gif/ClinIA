@@ -5,6 +5,15 @@ import assemblyai as aai
 
 aai.settings.api_key = "077c7fb352f4406b8d99cc78f999cb3a"    # <— move to secrets
 
+config = aai.TranscriptionConfig(
+    format_text=True,
+    punctuate=True,
+    language_code="es",
+    speaker_labels=True
+)
+config.speech_models = [
+    "universal"
+]
 
 
 # —————————- Page Headers ————————
@@ -20,27 +29,27 @@ st.info("Alpha v0.1 - Grabación Directa")
 
 def transcription_phase(audio_source):
     # Phase A: Converts audio (local file or URL) into a Transcript object.
-    config = aai.TranscriptionConfig(
-        format_text=True,
-        punctuate=True,
-        language_code="es",
-        speaker_labels=True
-    )
-    config.speech_models = [
-        "universal"
-    ]
+#    config = aai.TranscriptionConfig(
+#        format_text=True,
+#        punctuate=True,
+#        language_code="es",
+#        speaker_labels=True
+#    )
+#    config.speech_models = [
+#        "universal"
+#    ]
 
     # Initialize the Transcriber
     transcriber = aai.Transcriber(config = config)
 
-    print(f"Starting transcription for: {audio_source}") 
+    st.write("Starting transcription for: {audio_source}") 
     
     # This call is synchronous and will block until the transcript is ready
     transcript = transcriber.transcribe(audio_source) 
 
     # Error handling
     if transcript.status == aai.TranscriptStatus.error:
-        print(f"Transcription failed: {transcript.error}")
+        st.write(f"Transcription failed: {transcript.error}")
         return None
 
     st.write("Transcription successful!")
