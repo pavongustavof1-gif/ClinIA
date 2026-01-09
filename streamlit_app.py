@@ -63,15 +63,6 @@ async def transcribe_encounter_async(audio_source: str) -> Dict:
     )
 # ^^^Aquí
 
-# config = aai.TranscriptionConfig(
-#    format_text=True,
-#    punctuate=True,
-#    language_code="es",
-#    speaker_labels=True
-# )
-# config.speech_models = [
-#    "universal"
-# ]
 
 
 # —————————- Page Headers ————————
@@ -86,19 +77,9 @@ st.info("Alpha v0.1 - Grabación Directa")
 # ———————— Transcription phase —————-
 
 def transcription_phase(audio_source):
-    # Phase A: Converts audio (local file or URL) into a Transcript object.
-#    config = aai.TranscriptionConfig(
-#        format_text=True,
-#        punctuate=True,
-#        language_code="es",
-#        speaker_labels=True
-#    )
-#    config.speech_models = [
-#        "universal"
-#    ]
 
     # Initialize the Transcriber
-    transcriber = aai.Transcriber(config = config)
+    transcriber = aai.Transcriber()  # (config=config)   <-- OJO
 
     st.write("Starting transcription for: {audio_source}") 
     
