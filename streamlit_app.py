@@ -3,17 +3,46 @@
 import streamlit as st
 import assemblyai as aai
 
+#adapted from AssemblyAI
+import asyncio
+from typing import Dict, List
+from assemblyai.types import (
+    SpeakerOptions,
+    PIIRedactionPolicy,
+    PIISubstitutionPolicy,
+)
+
 aai.settings.api_key = "077c7fb352f4406b8d99cc78f999cb3a"    # <— move to secrets
 
-config = aai.TranscriptionConfig(
-    format_text=True,
-    punctuate=True,
-    language_code="es",
-    speaker_labels=True
-)
-config.speech_models = [
-    "universal"
-]
+#Adapted from AssemblyAI
+
+async def transcribe_encounter_async(audio_source: str) -> Dict:
+  
+#    Asynchronously transcribe a medical encounter with Slam-1
+#    Args:
+#        audio_source: Either a local file path or publicly accessible URL
+ 
+    # Configure comprehensive medical transcription
+    config = aai.TranscriptionConfig(
+        speech_model=aai.SpeechModel.universal,
+        # Diarize provider and patient
+        language_code="es",
+        speaker_labels=True,
+        speakers_expected=2,  # Typically provider and patient
+        # Punctuation and Formatting
+        punctuate=True,
+        format_text=True,
+
+
+# config = aai.TranscriptionConfig(
+#    format_text=True,
+#    punctuate=True,
+#    language_code="es",
+#    speaker_labels=True
+# )
+# config.speech_models = [
+#    "universal"
+# ]
 
 
 # —————————- Page Headers ————————
