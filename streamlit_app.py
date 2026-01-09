@@ -19,8 +19,6 @@ st.info("Alpha v0.1 - Grabación Directa")
 # ———————— Transcription phase —————-
 
 def transcription_phase(audio_source):
-    # st.write ("transcription_phase llamado")  <-- debug only
-  
     # Phase A: Converts audio (local file or URL) into a Transcript object.
     config = aai.TranscriptionConfig(
         format_text=True,
@@ -40,8 +38,6 @@ def transcription_phase(audio_source):
     # This call is synchronous and will block until the transcript is ready
     transcript = transcriber.transcribe(audio_source) 
 
-    # st.write("Tu dijiste: ", transcript.text)   <-- debug
-    
     # Error handling
     if transcript.status == aai.TranscriptStatus.error:
         print(f"Transcription failed: {transcript.error}")
@@ -62,7 +58,6 @@ audio_data = st.audio_input("Haz clic en el micrófono para grabar la conversaci
 
 if audio_data:
     # 1. Show the player so the user can verify the audio
-    # st.write ("recibido en if audio_data")  <—— debug only
     st.audio(audio_data)
     st.success("Audio capturado. Listo para procesar.")
     
@@ -74,7 +69,6 @@ if audio_data:
     st.write(f"Saved to {filename}")
     # Now you can use `filename` or `audio_value.getvalue()` in your API call
 
-    # st.write ("listo para enviar a transcription phase")   <--
     result = transcription_phase(filename)
     if result:
         st.write ("Tu dijiste:  ",result.text)
@@ -84,6 +78,3 @@ if audio_data:
                 # This is where we will plug in the Transcription + LLM logic
                 st.write("Siguiente paso: Enviando a la IA...")
 
-
-# config = aai.TranscriptionConfig(speaker_labels=True, auto_chapters=True)
-# transcript = transcriber.transcribe(audio_source, config=config)
