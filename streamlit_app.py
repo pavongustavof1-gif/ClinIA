@@ -57,7 +57,7 @@ async def transcribe_encounter_async(audio_source: str) -> Dict:
     #        PIIRedactionPolicy.date_of_birth,
     #        PIIRedactionPolicy.phone_number,
     #        PIIRedactionPolicy.email_address,
-        ],
+    #    ],
    #     redact_pii_sub=PIISubstitutionPolicy.hash,
    #     redact_pii_audio=True  # Create HIPAA-compliant audio
     )
