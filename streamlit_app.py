@@ -33,6 +33,35 @@ async def transcribe_encounter_async(audio_source: str) -> Dict:
         punctuate=True,
         format_text=True,
 
+        # Boost accuracy of medical terminology
+        keyterms_prompt=[
+            # Patient-specific context
+            "hypertensión", "diabetes mellitus tipo 2", "metformina",
+
+            # Specialty-specific terms
+            "auscultación", "palpación", "diagnóstico diferenciado",
+            "queja principal", "revisión de los sistemas", "exámen físico",
+
+            # Common medications
+            "lisinopril", "atorvastatina", "levotiroxina",
+
+            # Procedure terms
+            "electrocardiograma", "conteo de sangre", "hemoglobina A1c"
+        ],
+
+        # Speech understanding for medical documentation
+        entity_detection=True,  # Extract medications, conditions, procedures
+    #    redact_pii=True,  # HIPAA compliance
+    #    redact_pii_policies=[
+    #        PIIRedactionPolicy.person_name,
+    #        PIIRedactionPolicy.date_of_birth,
+    #        PIIRedactionPolicy.phone_number,
+    #        PIIRedactionPolicy.email_address,
+        ],
+   #     redact_pii_sub=PIISubstitutionPolicy.hash,
+   #     redact_pii_audio=True  # Create HIPAA-compliant audio
+    )
+# ^^^Aquí
 
 # config = aai.TranscriptionConfig(
 #    format_text=True,
