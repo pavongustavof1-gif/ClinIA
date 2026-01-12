@@ -11,12 +11,20 @@ from assemblyai.types import (
     PIIRedactionPolicy,
     PIISubstitutionPolicy,
 )
+# —————————- Page Headers ————————
+
+st.set_page_config(page_title="Note Taker Alpha")
+
+st.title("Asistente de Notas en Español 🇲🇽")
+st.info("Alpha v0.1 - Grabación Directa")
+
 
 aai.settings.api_key = "077c7fb352f4406b8d99cc78f999cb3a"    # <— move to secrets
 
+# ————————- Functions ——————————-
 #Adapted from AssemblyAI
 
-async def transcribe_encounter_async(audio_source: str) -> Dict:
+def transcribe_encounter (audio_source) # : str) -> Dict:
   
 #    Asynchronously transcribe a medical encounter with Slam-1
 #    Args:
@@ -61,41 +69,67 @@ async def transcribe_encounter_async(audio_source: str) -> Dict:
    #     redact_pii_sub=PIISubstitutionPolicy.hash,
    #     redact_pii_audio=True  # Create HIPAA-compliant audio
     )
-# ^^^Aquí
 
 
 
-# —————————- Page Headers ————————
 
-st.set_page_config(page_title="Note Taker Alpha")
-
-st.title("Asistente de Notas en Español 🇲🇽")
-st.info("Alpha v0.1 - Grabación Directa")
-
-# ————————- Functions ——————————-
 
 # ———————— Transcription phase —————-
 
-def transcription_phase(audio_source):
+# def transcription_phase(audio_source):
 
     # Initialize the Transcriber
-    transcriber = aai.Transcriber()  # (config=config)   <-- OJO
+transcriber = aai.Transcriber()  # (config=config)   <-- OJO
 
-    st.write("Starting transcription for: {audio_source}") 
+st.write("Starting transcription for: {audio_source}") 
     
     # This call is synchronous and will block until the transcript is ready
-    transcript = transcriber.transcribe(audio_source) 
+transcript = transcriber.transcribe(audio_source, config = config) 
 
     # Error handling
     if transcript.status == aai.TranscriptStatus.error:
-        st.write(f"Transcription failed: {transcript.error}")
+        st.write("Transcription failed: {transcript.error}")
         return None
 
     st.write("Transcription successful!")
-    return transcript
+    sr.write("Diálogo entre paciente y médico")
+    for utterance in transcript.utterances:
+            # Format timestamp
+            start_time = utterance.start / 1000  # Convert to seconds
+            end_time = utterance.end / 1000
 
+            # Identify speaker role
+            speaker_label = "Médico" if utterance.speaker == "A" else "Paciente"
 
+            # Print formatted utterance
+            st.write([{start_time:.1f}s - {end_time:.1f}s] {speaker_label}:")
+            st.write("  {utterance.text}")
+            st.write("  Confidence: {utterance.confidence:.2%}\n")
 
+        # Extract clinical entities
+        if transcript.entities:
+            print("\n=== Entidades Clínicas Detectadas ===\n")
+            medications = [e for e in transcript.entities if e.entity_type == "medication"]
+            conditions = [e for e in transcript.entities if e.entity_type == "medical_condition"]
+            procedures = [e for e in transcript.entities if e.entity_type == "medical_procedure"]
+
+            if medications:
+                st.write("Medicamento:", ", ".join([m.text for m in medications]))
+            if conditions:
+                st.write("Condiciónes:", ", ".join([c.text for c in conditions]))
+            if procedures:
+                sr.write("Procedimientos:", ", ".join([p.text for p in procedures]))
+                
+        return {
+            "transcript": transcript,
+            "utterances": transcript.utterances,
+            "entities": transcript.entities,
+            "redacted_audio_url": transcript.redacted_audio_url
+        }
+
+    except Exception as e:
+        st.write("Error during transcription: {e}")
+        raise
 
 
 
@@ -117,12 +151,24 @@ if audio_data:
     st.write(f"Saved to {filename}")
     # Now you can use `filename` or `audio_value.getvalue()` in your API call
 
-    result = transcription_phase(filename)
-    if result:
-        st.write ("Tu dijiste:  ",result.text)
+    try:
+        result = await transcribe_encounter(filename)
+
+        # Additional processing
+        st.write("\nEncounter duration: {result['transcript'].audio_duration} seconds")
+
+        # Could send to LLM Gateway for SOAP note generation here
+
+    except Exception as e:
+        print(f"Failed to process encounter: {e}")
+
+
+#   result = transcribe_encounter (filename) # transcription_phase(filename)
+#    if result:
+#        st.write ("Tu dijiste:  ",result.text)
     
-        if st.button("Generar Resumen y Google Doc"):
-            with st.spinner("Transcribiendo y analizando..."):
-                # This is where we will plug in the Transcription + LLM logic
-                st.write("Siguiente paso: Enviando a la IA...")
+ #       if st.button("Generar Resumen y Google Doc"):
+ #           with st.spinner("Transcribiendo y analizando..."):
+ #               # This is where we will plug in the Transcription + LLM logic
+ #               st.write("Siguiente paso: Enviando a la IA...")
 
