@@ -24,7 +24,7 @@ aai.settings.api_key = "077c7fb352f4406b8d99cc78f999cb3a"    # <— move to secr
 # ————————- Functions ——————————-
 #Adapted from AssemblyAI
 
-def transcribe_encounter (audio_source) # : str) -> Dict:
+def transcribe_encounter (audio_source): # : str) -> Dict:
   
 #    Asynchronously transcribe a medical encounter with Slam-1
 #    Args:
