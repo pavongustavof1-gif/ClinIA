@@ -102,9 +102,10 @@ transcript = transcriber.transcribe(audio_source, config = config)
             speaker_label = "Médico" if utterance.speaker == "A" else "Paciente"
 
             # Print formatted utterance
-            st.write([{start_time:.1f}s - {end_time:.1f}s] {speaker_label}:")
+     #       st.write([{start_time:.1f}s - {end_time:.1f}s] {speaker_label}:")
+            st.write(" {speaker_label}:")
             st.write("  {utterance.text}")
-            st.write("  Confidence: {utterance.confidence:.2%}\n")
+    #        st.write("  Confidence: {utterance.confidence:.2%}\n")
 
         # Extract clinical entities
         if transcript.entities:
