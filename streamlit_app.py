@@ -87,46 +87,46 @@ st.write("Starting transcription for: {audio_source}")
 transcript = transcriber.transcribe(audio_source, config = config) 
 
     # Error handling
-    if transcript.status == aai.TranscriptStatus.error:
-        st.write("Transcription failed: {transcript.error}")
-        return None
+if transcript.status == aai.TranscriptStatus.error:
+    st.write("Transcription failed: {transcript.error}")
+    return None
 
-    st.write("Transcription successful!")
-    sr.write("Diálogo entre paciente y médico")
-    for utterance in transcript.utterances:
+st.write("Transcription successful!")
+sr.write("Diálogo entre paciente y médico")
+for utterance in transcript.utterances:
             # Format timestamp
-            start_time = utterance.start / 1000  # Convert to seconds
-            end_time = utterance.end / 1000
+    start_time = utterance.start / 1000  # Convert to seconds
+    end_time = utterance.end / 1000
 
             # Identify speaker role
-            speaker_label = "Médico" if utterance.speaker == "A" else "Paciente"
+    speaker_label = "Médico" if utterance.speaker == "A" else "Paciente"
 
             # Print formatted utterance
      #       st.write([{start_time:.1f}s - {end_time:.1f}s] {speaker_label}:")
-            st.write(" {speaker_label}:")
-            st.write("  {utterance.text}")
+    st.write(" {speaker_label}:")
+    st.write("  {utterance.text}")
     #        st.write("  Confidence: {utterance.confidence:.2%}\n")
 
         # Extract clinical entities
-        if transcript.entities:
-            print("\n=== Entidades Clínicas Detectadas ===\n")
-            medications = [e for e in transcript.entities if e.entity_type == "medication"]
-            conditions = [e for e in transcript.entities if e.entity_type == "medical_condition"]
-            procedures = [e for e in transcript.entities if e.entity_type == "medical_procedure"]
+    if transcript.entities:
+        st.write("\n=== Entidades Clínicas Detectadas ===\n")
+        medications = [e for e in transcript.entities if e.entity_type == "medication"]
+        conditions = [e for e in transcript.entities if e.entity_type == "medical_condition"]
+        procedures = [e for e in transcript.entities if e.entity_type == "medical_procedure"]
 
-            if medications:
-                st.write("Medicamento:", ", ".join([m.text for m in medications]))
-            if conditions:
-                st.write("Condiciónes:", ", ".join([c.text for c in conditions]))
-            if procedures:
-                sr.write("Procedimientos:", ", ".join([p.text for p in procedures]))
+        if medications:
+            st.write("Medicamento:", ", ".join([m.text for m in medications]))
+        if conditions:
+            st.write("Condiciónes:", ", ".join([c.text for c in conditions]))
+        if procedures:
+            st.write("Procedimientos:", ", ".join([p.text for p in procedures]))
                 
-        return {
-            "transcript": transcript,
-            "utterances": transcript.utterances,
-            "entities": transcript.entities,
-            "redacted_audio_url": transcript.redacted_audio_url
-        }
+    return {
+        "transcript": transcript,
+        "utterances": transcript.utterances,
+        "entities": transcript.entities,
+  #          "redacted_audio_url": transcript.redacted_audio_url
+    }
 
     except Exception as e:
         st.write("Error during transcription: {e}")
