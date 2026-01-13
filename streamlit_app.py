@@ -53,6 +53,13 @@ def transcription_phase(audio_source):
     
     # This call is synchronous and will block until the transcript is ready
     transcript = transcriber.transcribe(audio_source) 
+
+    transcript = await asyncio.to_thread(
+        transcriber.transcribe,
+        audio_source,
+        config=config
+    )
+  
     
     # Error handling
     if transcript.status == aai.TranscriptStatus.error:
@@ -61,8 +68,6 @@ def transcription_phase(audio_source):
 
     st.write("Transcription successful!")
     return transcript
-
-
 
 
 
@@ -81,17 +86,17 @@ if audio_data:
     with open(filename, "wb") as f:
         f.write(audio_data.getvalue())
 
-    st.write(f"Saved to {filename}")
+    st.write("Saved to {filename}")
     # Now you can use `filename` or `audio_value.getvalue()` in your API call
 
     result = transcription_phase(filename)
     if result:
         st.write ("Tu dijiste:  ",result.text)
     
-        if st.button("Generar Resumen y Google Doc"):
-            with st.spinner("Transcribiendo y analizando..."):
-                # This is where we will plug in the Transcription + LLM logic
-                st.write("Siguiente paso: Enviando a la IA...")
+#        if st.button("Generar Resumen y Google Doc"):
+#            with st.spinner("Transcribiendo y analizando..."):
+#                # This is where we will plug in the Transcription + LLM logic
+#                st.write("Siguiente paso: Enviando a la IA...")
 
 
 # config = aai.TranscriptionConfig(speaker_labels=True, auto_chapters=True)
