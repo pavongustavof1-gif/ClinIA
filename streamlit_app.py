@@ -153,10 +153,12 @@ if audio_data:
     # Now you can use `filename` or `audio_value.getvalue()` in your API call
 
     try:
-        result = await transcribe_encounter(filename)
+#        result = await transcribe_encounter(filename)
+        result = transcribe_encounter(filename)
 
         # Additional processing
-        st.write("\nEncounter duration: {result['transcript'].audio_duration} seconds")
+        if result:
+            st.write("\nEncounter duration: {result['transcript'].audio_duration} seconds")
 
         # Could send to LLM Gateway for SOAP note generation here
 
