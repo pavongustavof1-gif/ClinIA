@@ -22,7 +22,7 @@ def transcription_phase(audio_source):
   
     # Phase A: Converts audio (local file or URL) into a Transcript object.
     config = aai.TranscriptionConfig(
-        speech_models = universal,
+        speech_model = aai.SpeechModel.universal,
         format_text=True,
         punctuate=True,
         language_code="es",  
