@@ -128,9 +128,9 @@ for utterance in transcript.utterances:
   #          "redacted_audio_url": transcript.redacted_audio_url
     }
 
-    except Exception as e:
-        st.error(f"Error during transcription: {e}") # st.error(f"An error occurred: {e}")
-        raise
+  #  except Exception as e:
+  #      st.error(f"Error during transcription: {e}") # st.error(f"An error occurred: {e}")
+  #      raise
 
 
 
