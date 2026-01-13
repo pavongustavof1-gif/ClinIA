@@ -73,7 +73,6 @@ def transcribe_encounter (audio_source): # : str) -> Dict:
 
 
 
-
 # ———————— Transcription phase —————-
 
 # def transcription_phase(audio_source):
@@ -89,7 +88,7 @@ transcript = transcriber.transcribe(audio_source, config = config)
     # Error handling
 if transcript.status == aai.TranscriptStatus.error:
     st.write("Transcription failed: {transcript.error}")
-    return None
+#    return None
 
 st.write("Transcription successful!")
 sr.write("Diálogo entre paciente y médico")
