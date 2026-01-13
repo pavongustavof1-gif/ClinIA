@@ -22,25 +22,41 @@ def transcription_phase(audio_source):
   
     # Phase A: Converts audio (local file or URL) into a Transcript object.
     config = aai.TranscriptionConfig(
+        speech_models = universal,
         format_text=True,
         punctuate=True,
-        language_code="es"    
+        language_code="es"  
+              # Diarize provider and patient
+        speaker_labels=True,
+        speakers_expected=2,  # Typically provider and patient
+        keyterms_prompt=[
+            # Patient-specific context
+            "hypertension", "diabetes mellitus type 2", "metformin",
+
+            # Specialty-specific terms
+            "auscultation", "palpation", "differential diagnosis",
+            "chief complaint", "review of systems", "physical examination",
+
+            # Common medications
+            "lisinopril", "atorvastatin", "levothyroxine",
+
+            # Procedure terms
+            "electrocardiogram", "complete blood count", "hemoglobin A1c"
+        ],
+        entity_detection=True
     )
-    config.speech_models = [
-        "universal"
-    ]
 
     # Initialize the Transcriber
     transcriber = aai.Transcriber(config = config)
 
-    print(f"Starting transcription for: {audio_source}") 
+    st.write("Starting transcription for: {audio_source}") 
     
     # This call is synchronous and will block until the transcript is ready
     transcript = transcriber.transcribe(audio_source) 
     
     # Error handling
     if transcript.status == aai.TranscriptStatus.error:
-        print(f"Transcription failed: {transcript.error}")
+        st.write("Transcription failed: {transcript.error}")
         return None
 
     st.write("Transcription successful!")
