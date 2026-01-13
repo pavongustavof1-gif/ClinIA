@@ -129,7 +129,7 @@ for utterance in transcript.utterances:
     }
 
     except Exception as e:
-        st.write("Error during transcription: {e}")
+        st.error(f"Error during transcription: {e}") # st.error(f"An error occurred: {e}")
         raise
 
 
