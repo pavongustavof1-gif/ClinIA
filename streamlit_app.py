@@ -25,7 +25,7 @@ def transcription_phase(audio_source):
         speech_models = universal,
         format_text=True,
         punctuate=True,
-        language_code="es"  
+        language_code="es",  
               # Diarize provider and patient
         speaker_labels=True,
         speakers_expected=2,  # Typically provider and patient
