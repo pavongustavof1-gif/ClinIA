@@ -52,7 +52,7 @@ def transcription_phase(audio_source):
     st.write("Starting transcription for: {audio_source}") 
     
     # This call is synchronous and will block until the transcript is ready
-    transcript = transcriber.transcribe(audio_source) 
+    # transcript = transcriber.transcribe(audio_source) 
 
     transcript = (
         transcriber.transcribe,
