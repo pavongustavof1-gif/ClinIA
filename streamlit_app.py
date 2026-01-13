@@ -54,7 +54,7 @@ def transcription_phase(audio_source):
     # This call is synchronous and will block until the transcript is ready
     transcript = transcriber.transcribe(audio_source) 
 
-    transcript = await asyncio.to_thread(
+    transcript = (
         transcriber.transcribe,
         audio_source,
         config=config
