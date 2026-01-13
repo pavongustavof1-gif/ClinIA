@@ -22,52 +22,31 @@ def transcription_phase(audio_source):
   
     # Phase A: Converts audio (local file or URL) into a Transcript object.
     config = aai.TranscriptionConfig(
-        speech_model = aai.SpeechModel.universal,
         format_text=True,
         punctuate=True,
-        language_code="es",  
-              # Diarize provider and patient
-        speaker_labels=True,
-        speakers_expected=2,  # Typically provider and patient
-        keyterms_prompt=[
-            # Patient-specific context
-            "hypertension", "diabetes mellitus type 2", "metformin",
-
-            # Specialty-specific terms
-            "auscultation", "palpation", "differential diagnosis",
-            "chief complaint", "review of systems", "physical examination",
-
-            # Common medications
-            "lisinopril", "atorvastatin", "levothyroxine",
-
-            # Procedure terms
-            "electrocardiogram", "complete blood count", "hemoglobin A1c"
-        ],
-        entity_detection=True
+        language_code="es"    
     )
+    config.speech_models = [
+        "universal"
+    ]
 
     # Initialize the Transcriber
     transcriber = aai.Transcriber(config = config)
 
-    st.write("Starting transcription for: {audio_source}") 
+    print(f"Starting transcription for: {audio_source}") 
     
     # This call is synchronous and will block until the transcript is ready
     transcript = transcriber.transcribe(audio_source) 
-
-    # transcript = (
-    #    transcriber.transcribe,
-    #    audio_source,
-    #    config=config
-   # )
-  
     
     # Error handling
     if transcript.status == aai.TranscriptStatus.error:
-        st.write("Transcription failed: {transcript.error}")
+        print(f"Transcription failed: {transcript.error}")
         return None
 
     st.write("Transcription successful!")
     return transcript
+
+
 
 
 
@@ -86,17 +65,17 @@ if audio_data:
     with open(filename, "wb") as f:
         f.write(audio_data.getvalue())
 
-    st.write("Saved to {filename}")
+    st.write(f"Saved to {filename}")
     # Now you can use `filename` or `audio_value.getvalue()` in your API call
 
     result = transcription_phase(filename)
     if result:
         st.write ("Tu dijiste:  ",result.text)
     
-#        if st.button("Generar Resumen y Google Doc"):
-#            with st.spinner("Transcribiendo y analizando..."):
-#                # This is where we will plug in the Transcription + LLM logic
-#                st.write("Siguiente paso: Enviando a la IA...")
+        if st.button("Generar Resumen y Google Doc"):
+            with st.spinner("Transcribiendo y analizando..."):
+                # This is where we will plug in the Transcription + LLM logic
+                st.write("Siguiente paso: Enviando a la IA...")
 
 
 # config = aai.TranscriptionConfig(speaker_labels=True, auto_chapters=True)
