@@ -152,7 +152,7 @@ if audio_data:
     st.write(f"Saved to {filename}")
     # Now you can use `filename` or `audio_value.getvalue()` in your API call
 
-    try:
+#    try:
 #        result = await transcribe_encounter(filename)
         result = transcribe_encounter(filename)
 
@@ -162,8 +162,8 @@ if audio_data:
 
         # Could send to LLM Gateway for SOAP note generation here
 
-    except Exception as e:
-        print(f"Failed to process encounter: {e}")
+ #   except Exception as e:
+ #       print(f"Failed to process encounter: {e}")
 
 
 #   result = transcribe_encounter (filename) # transcription_phase(filename)
